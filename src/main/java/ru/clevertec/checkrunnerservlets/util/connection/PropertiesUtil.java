@@ -1,4 +1,4 @@
-package ru.clevertec.checkrunnerservlets.util;
+package ru.clevertec.checkrunnerservlets.util.connection;
 
 import java.io.IOException;
 import java.util.Properties;
