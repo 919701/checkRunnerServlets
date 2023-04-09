@@ -51,7 +51,6 @@ class ProductDAOTest {
         Product product = new Product("123", 123d, false);
 
         assertTrue(dao.create(product));
-        dao.delete(product.getId());
     }
 
     @Test
@@ -68,7 +67,6 @@ class ProductDAOTest {
 
     @Test
     void delete() {
-
-        assertTrue(dao.delete(11L));
+        assertTrue(dao.delete(13L));
     }
 }

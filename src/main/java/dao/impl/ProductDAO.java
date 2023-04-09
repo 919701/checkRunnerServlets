@@ -27,16 +27,6 @@ public class ProductDAO implements DAO<Product, Long> {
     }
 
     /**
-     Check exist product by ID.
-
-     @param id for select
-     @return true if exist. False if does not exist.
-     */
-    private boolean isExist(@NonNull final long id) {
-        return read(id).getId() != -1;
-    }
-
-    /**
      Create Product in database.
 
      @param product for create.
@@ -44,9 +34,6 @@ public class ProductDAO implements DAO<Product, Long> {
      */
     @Override
     public boolean create(@NonNull final Product product) {
-        if (!isExist(product.getId())) {
-            return false;
-        }
 
         boolean result = false;
 
@@ -119,9 +106,6 @@ public class ProductDAO implements DAO<Product, Long> {
      */
     @Override
     public boolean delete(@NonNull Long id) {
-        if (!isExist(id)) {
-            return false;
-        }
 
         boolean result = false;
         try (PreparedStatement statement = connection.prepareStatement(SQLProduct.DELETE.QUERY)) {
