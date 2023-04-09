@@ -7,20 +7,20 @@ import java.util.List;
 
  @param <T>
  */
-public interface Repository<T> {
+public interface Repository<Entity,Key> {
 
     //Getting a List of Entities
-    List<T> findAll();
+    List<Entity> findAll();
 
     //Entity Search
-    T find(int id);
+    Entity find(Key key);
 
     //Entity update
-    T update(T entity);
+    boolean update(Key key, Entity entity);
 
     //Adding entity - returns the ID of the added entity
-    T insert(T entity);
+    boolean insert(Entity entity);
 
     //Deleting an entity
-    T delete(int id, T entity);
+    boolean delete(Key key);
 }

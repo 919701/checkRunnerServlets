@@ -1,15 +1,14 @@
-package dao.impl;
+package ru.clevertec.checkrunnerservlets.repository.impl;
 
-import dao.DAO;
 import lombok.NonNull;
 import ru.clevertec.checkrunnerservlets.model.Product;
+import ru.clevertec.checkrunnerservlets.repository.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ProductDAO implements DAO<Product, Long> {
+public class RepositoryProductImpl implements Repository<Product, Long> {
 
     /**
      Connection of database.
@@ -22,7 +21,7 @@ public class ProductDAO implements DAO<Product, Long> {
 
      @param connection of database.
      */
-    public ProductDAO(@NonNull Connection connection) {
+    public RepositoryProductImpl(@NonNull Connection connection) {
         this.connection = connection;
     }
 
@@ -33,8 +32,7 @@ public class ProductDAO implements DAO<Product, Long> {
      @return false if User already exist. If creating success true.
      */
     @Override
-    public boolean create(@NonNull final Product product) {
-
+    public boolean insert(@NonNull final Product product) {
         boolean result = false;
 
         try (PreparedStatement statement = connection.prepareStatement((SQLProduct.INSERT.QUERY))) {
@@ -49,6 +47,27 @@ public class ProductDAO implements DAO<Product, Long> {
         return result;
     }
 
+    @Override
+    public List<Product> findAll() {
+        List<Product> products = new CopyOnWriteArrayList<>();
+
+        try (Statement statement = connection.createStatement()) {
+            final ResultSet resultSet = statement.executeQuery(SQLProduct.GET_ALL.QUERY);
+            while (resultSet.next()) {
+                products.add(new Product(
+                        resultSet.getLong("id_product"),
+                        resultSet.getString("name_product"),
+                        resultSet.getDouble("price_product"),
+                        resultSet.getBoolean("discount_product")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+
     /**
      Select product by ID
 
@@ -56,9 +75,8 @@ public class ProductDAO implements DAO<Product, Long> {
      @return valid entity if she exists. If entity does not exist return empty User with id = -1.
      */
     @Override
-    public Product read(@NonNull final Long id) {
-        final Product product = new Product("123", 123d, false);
-        product.setId(-1L);
+    public Product find(@NonNull final Long id) {
+        final Product product = new Product();
 
         try (PreparedStatement statement = connection.prepareStatement((SQLProduct.GET.QUERY))) {
             statement.setLong(1, id);
@@ -99,10 +117,10 @@ public class ProductDAO implements DAO<Product, Long> {
     }
 
     /**
-     * Delete product by ID.
-     *
-     * @param id for delete.
-     * @return true if Product was deleted. False if Product not exist.
+     Delete product by ID.
+
+     @param id for delete.
+     @return true if Product was deleted. False if Product not exist.
      */
     @Override
     public boolean delete(@NonNull Long id) {
@@ -121,7 +139,8 @@ public class ProductDAO implements DAO<Product, Long> {
         INSERT("INSERT INTO products (id_product,name_product, price_product, discount_product) VALUES (DEFAULT,(?), (?), (?)) RETURNING id_product"),
         GET("SELECT id_product, name_product, price_product,discount_product  FROM products WHERE id_product = (?)"),
         DELETE("DELETE FROM products WHERE id_product = (?)  RETURNING id_product"),
-        UPDATE("UPDATE products SET name_product = (?),price_product= (?), discount_product= (?) WHERE id_product= (?) RETURNING id_product");
+        UPDATE("UPDATE products SET name_product = (?),price_product= (?), discount_product= (?) WHERE id_product= (?) RETURNING id_product"),
+        GET_ALL("SELECT * FROM products");
 
         String QUERY;
 
