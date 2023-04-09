@@ -3,7 +3,7 @@ values (1234, 5),
        (9876, 8),
        (1724, 10);
 
-insert into products(product_name, product_price, product_discount)
+insert into products(name_product, price_product, discount_product)
 values ('Potato', 5.43, false),
        ('Tomato', 6.36, false),
        ('Carrot', 3.49, true),

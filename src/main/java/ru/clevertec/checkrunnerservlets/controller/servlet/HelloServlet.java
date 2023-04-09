@@ -1,4 +1,4 @@
-package ru.clevertec.checkrunnerservlets;
+package ru.clevertec.checkrunnerservlets.controller.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

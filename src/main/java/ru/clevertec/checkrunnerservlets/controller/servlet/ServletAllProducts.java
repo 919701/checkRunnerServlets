@@ -1,6 +1,7 @@
 package ru.clevertec.checkrunnerservlets.controller.servlet;
 
 import ru.clevertec.checkrunnerservlets.model.Product;
+import ru.clevertec.checkrunnerservlets.repository.ConnectionDatasource;
 import ru.clevertec.checkrunnerservlets.repository.Repository;
 import ru.clevertec.checkrunnerservlets.repository.impl.ProductImpl;
 
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -16,6 +18,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @WebServlet("/all_products")
 public class ServletAllProducts extends HttpServlet {
     private final static String INDEX = "/WEB-INF/view/all_products.jsp";
+    DataSource dataSource;
     private final Repository<Product> productRepository = new ProductImpl(dataSource);
     private List<Product> products;
 
