@@ -1,4 +1,4 @@
-package ru.clevertec.checkrunnerservlets.util;
+package ru.clevertec.checkrunnerservlets.util.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

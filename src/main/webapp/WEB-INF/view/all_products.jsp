@@ -6,11 +6,31 @@
 </head>
 <body>
 ALL PRODUCT
-<ul>
+<table border="1" cellpadding="5" cellspacing="1" >
+    <tr>
+        <th>edit</th>
+        <th>delete</th>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+        <th>discount</th>
+    </tr>
+
+
     <c:forEach var="product" items="${requestScope.products}">
-        <li>Name: <c:out value="${product.name}"/> Price: <c:out value="${product.price}"/></li>
-        <hr/>
+        <tr>
+            <td>
+                <a href="updateExpense?id=${product.id}">Edit</a>
+            </td>
+            <td>
+                <a href="deleteExpense?id=${product.id}">Delete</a>
+            </td>
+            <td>"${product.id}"</td>
+            <td>"${product.name}"</td>
+            <td>"${product.price}"</td>
+            <td>"${product.discount}"</td>
+        </tr>
     </c:forEach>
-</ul>
+</table>
 </body>
 </html>
