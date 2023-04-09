@@ -7,11 +7,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.clevertec.checkrunnerservlets.model.Product;
 import ru.clevertec.checkrunnerservlets.repository.Repository;
-import ru.clevertec.checkrunnerservlets.util.connection.ConnectionManager;
+import ru.clevertec.checkrunnerservlets.util.ConnectionManager;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.SQLException;
-import java.util.List;
 
 class RepositoryProductImplTest {
 
@@ -46,8 +46,6 @@ class RepositoryProductImplTest {
 
     @Test
     void findAll() {
-        List<Product> productList = repository.findAll();
-        System.out.println(productList);
     }
 
     @Test
