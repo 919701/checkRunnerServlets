@@ -6,7 +6,8 @@
 </head>
 <body>
 ALL PRODUCT
-<table border="1" cellpadding="5" cellspacing="1" >
+<table  >
+
     <tr>
         <th>edit</th>
         <th>delete</th>
@@ -25,10 +26,10 @@ ALL PRODUCT
             <td>
                 <a href="deleteExpense?id=${product.id}">Delete</a>
             </td>
-            <td>"${product.id}"</td>
-            <td>"${product.name}"</td>
-            <td>"${product.price}"</td>
-            <td>"${product.discount}"</td>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.discount}</td>
         </tr>
     </c:forEach>
 </table>
