@@ -6,6 +6,8 @@ import ru.clevertec.checkrunnerservlets.model.Product;
 import ru.clevertec.checkrunnerservlets.repository.Repository;
 
 import java.sql.*;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -27,7 +29,7 @@ public class RepositoryProductImpl implements Repository<Product, Long> {
      */
     @Override
     public boolean insert(@NonNull final Product product) {
-        boolean result;
+        boolean result = false;
 
         try (PreparedStatement statement = connection.prepareStatement((SQLProduct.INSERT.QUERY))) {
             statement.setString(1, product.getName());
@@ -97,7 +99,7 @@ public class RepositoryProductImpl implements Repository<Product, Long> {
      */
     @Override
     public boolean update(@NonNull final Long id,@NonNull final Product newProduct) {
-        boolean result;
+        boolean result = false;
 
         try (PreparedStatement statement = connection.prepareStatement(SQLProduct.UPDATE.QUERY)) {
             statement.setString(1, newProduct.getName());
@@ -136,8 +138,8 @@ public class RepositoryProductImpl implements Repository<Product, Long> {
     enum SQLProduct {
         INSERT("INSERT INTO products (id_product,name_product, price_product, discount_product) VALUES (DEFAULT,(?), (?), (?)) RETURNING id_product"),
         GET("SELECT id_product, name_product, price_product,discount_product  FROM products WHERE id_product = (?)"),
-        DELETE("DELETE FROM products WHERE id_product = (?)  RETURNING id_product"),
-        UPDATE("UPDATE products SET name_product = (?),price_product= (?), discount_product= (?) WHERE id_product= (?) RETURNING id_product"),
+        DELETE("DELETE FROM products WHERE id_product = (?) RETURNING id_product"),
+        UPDATE("UPDATE products SET name_product = (?),price_product= (?), discount_product= (?) WHERE id_product= (?) RETURNING id_product"  ),
         GET_ALL("SELECT * FROM products");
 
         final String QUERY;

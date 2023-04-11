@@ -1,5 +1,6 @@
-package ru.clevertec.checkrunnerservlets.controller.servlet;
+package ru.clevertec.checkrunnerservlets.controller.servlet.servletProduct;
 
+import ru.clevertec.checkrunnerservlets.model.Product;
 import ru.clevertec.checkrunnerservlets.repository.Repository;
 import ru.clevertec.checkrunnerservlets.repository.impl.RepositoryProductImpl;
 import ru.clevertec.checkrunnerservlets.util.connection.ConnectionManager;
@@ -15,7 +16,7 @@ import java.io.IOException;
 @WebServlet("/all_products")
 public class ServletAllProducts extends HttpServlet {
 
-    private final Repository repositoryProduct = new RepositoryProductImpl(ConnectionManager.open());
+    private final Repository<Product, Long> repositoryProduct = new RepositoryProductImpl(ConnectionManager.open());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,11 +26,6 @@ public class ServletAllProducts extends HttpServlet {
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/view/all_products.jsp");
         dispatcher.forward(request, response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class RepositoryProductImplTest {
 
     @NonNull
@@ -41,7 +43,7 @@ class RepositoryProductImplTest {
     void insert() {
         Product product = new Product("123", 123d, false);
 
-        Assertions.assertTrue(repository.insert(product));
+        assertTrue(repository.insert(product));
     }
 
     @Test
@@ -56,6 +58,8 @@ class RepositoryProductImplTest {
 
     @Test
     void update() {
+        Product product = new Product("updateNewProduct25", 15d, true);
+        assertTrue(repository.update(15L, product));
     }
 
     @Test
