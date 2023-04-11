@@ -60,9 +60,9 @@
     <div id="About" class="tabcontent" style="background-color:lightgrey" ;>
         <h6>
             ID: ${requestScope.product.id}<br/>
-            Name: ${requestScope.product.name}<br/>
-            Price: ${requestScope.product.price}<br/>
-            Promotion: ${requestScope.product.discount ? 'YES' : 'NO'}<br/>
+            Name: ${requestScope.product.nameProduct}<br/>
+            Price: ${requestScope.product.priceProduct}<br/>
+            Promotion: ${requestScope.product.discountProduct ? 'YES' : 'NO'}<br/>
         </h6>
     </div>
 
@@ -70,9 +70,9 @@
         <form method="POST" action="${pageContext.request.contextPath}/update_product">
             <h6>
                 <label><input type="number" hidden name="idProduct" value="${requestScope.product.id}"/></label>
-                <label> Name: <input type="text" name="nameProduct" value="${requestScope.product.name}"></label><br/>
+                <label> Name: <input type="text" name="nameProduct" value="${requestScope.product.nameProduct}"></label><br/>
                 <p></p>
-                <label> Price: <input type="number" name="priceProduct" value="${requestScope.product.price}"
+                <label> Price: <input type="number" name="priceProduct" value="${requestScope.product.priceProduct}"
                                       min=0 placeholder="1.0" step="0.01"></label><br/>
                 <p></p>
                 <%--                <label>Promotion: <input type="checkbox" name="discountProduct"--%>

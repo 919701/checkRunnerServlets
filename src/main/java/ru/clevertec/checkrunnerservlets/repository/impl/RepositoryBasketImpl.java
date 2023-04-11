@@ -6,7 +6,6 @@ import ru.clevertec.checkrunnerservlets.model.Basket;
 import ru.clevertec.checkrunnerservlets.repository.Repository;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -42,7 +41,7 @@ public class RepositoryBasketImpl implements Repository<Basket, Long> {
     }
 
     @Override
-    public Basket find(Long id) {
+    public Basket find(@NonNull final Long id) {
         final Basket product = new Basket();
 
         try (PreparedStatement statement = connection.prepareStatement((SQLBasket.GET.QUERY))) {
@@ -66,7 +65,7 @@ public class RepositoryBasketImpl implements Repository<Basket, Long> {
     }
 
     @Override
-    public boolean update(Long id, Basket newProduct) {
+    public boolean update(@NonNull final Long id,@NonNull final Basket newProduct) {
         boolean result = false;
 
         try (PreparedStatement statement = connection.prepareStatement(SQLBasket.UPDATE.QUERY)) {
@@ -112,7 +111,7 @@ public class RepositoryBasketImpl implements Repository<Basket, Long> {
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(@NonNull final Long id) {
         boolean result = false;
 
         try (PreparedStatement statement = connection.prepareStatement(SQLBasket.DELETE.QUERY)) {
