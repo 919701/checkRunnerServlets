@@ -71,23 +71,27 @@
 <body>
 <jsp:include page="../include/sidenav.jsp"/>
 <div class="main">
-    <h3>Product </h3>
+    <h3>List of items in the cart</h3>
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
     <table id="myTable">
         <tr class="header">
+            <th>N/P</th>
             <th>Name</th>
             <th>Price</th>
+            <th>Quantity</th>
             <th>Discount</th>
-            <th>Add to Basket</th>
+            <th>Total</th>
+            <th>Final coast</th>
         </tr>
-        <c:forEach var="product" items="${requestScope.products}">
+        <c:forEach var="basket" items="${requestScope.basketList}">
             <tr>
-                <td><a href="single_product?id=${product.id}">${product.name}</a></td>
-                <td>$ ${product.price}</td>
-                <td>${product.discount ? 'YES' : 'NO'}</td>
-                <td>
-                    <a href="basket_single_product?id=${product.id}">add in basket</a>
-                </td>
+                <td>${basket.id}</td>
+                <td><a href="basket_one_product?id=${basket.id}">${basket.nameProduct}</a></td>
+                <td>$ ${basket.priceProduct}</td>
+                <td>${basket.quantityProduct}</td>
+                <td>${basket.discountProduct ? 'YES' : 'NO'}</td>
+                <td>$ ${basket.totalPrice}</td>
+                <td>$ ${basket.totalDiscount}</td>
             </tr>
         </c:forEach>
     </table>
@@ -101,7 +105,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[1];
             if (td) {
                 if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                     tr[i].style.display = "";

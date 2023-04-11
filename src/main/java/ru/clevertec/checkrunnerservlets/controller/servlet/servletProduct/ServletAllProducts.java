@@ -20,8 +20,6 @@ public class ServletAllProducts extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         request.setAttribute("products", repositoryProduct.findAll());
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/view/all_products.jsp");

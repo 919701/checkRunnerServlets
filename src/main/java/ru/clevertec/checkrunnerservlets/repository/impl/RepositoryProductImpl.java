@@ -121,8 +121,8 @@ public class RepositoryProductImpl implements Repository<Product, Long> {
      */
     @Override
     public boolean delete(@NonNull final Long id) {
-
         boolean result = false;
+
         try (PreparedStatement statement = connection.prepareStatement(SQLProduct.DELETE.QUERY)) {
             statement.setLong(1, id);
             result = statement.executeQuery().next();

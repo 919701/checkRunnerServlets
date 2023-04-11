@@ -27,4 +27,14 @@ public class Basket {
         this.discountCardPercent = discountCardPercent;
         this.totalDiscount = totalDiscount;
     }
+
+    public Basket(Long id, String nameProduct, Double priceProduct, Double quantityProduct, Boolean discountProduct, Double totalPrice, Double totalDiscount) {
+        this.id = id;
+        this.nameProduct = nameProduct;
+        this.priceProduct = priceProduct;
+        this.quantityProduct = quantityProduct;
+        this.discountProduct = discountProduct;
+        this.totalPrice = totalPrice;
+        this.totalDiscount = totalDiscount;
+    }
 }
